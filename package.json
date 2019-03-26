@@ -1,0 +1,10 @@
+{
+  "name": "multi-page-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Ventilador/multi-page-test.git",
+  "author": "Pedro Pertino <ppertino@axioma.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["main", "content", "component"]
+}
