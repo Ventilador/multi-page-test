@@ -1,0 +1,13 @@
+{
+  "name": "multi-page-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+      "clean":"rimraf workbench/node_modules first-dashboard/node_modules second-dashboad/node_modules workbench/node_modules components/node_modules"
+  },
+  "repository": "https://github.com/Ventilador/multi-page-test.git",
+  "author": "Pedro Pertino <ppertino@axioma.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["workbench", "first-dashboard", "second-dashboad", "components"]
+}
