@@ -1,0 +1,21 @@
+{
+  "name": "chart",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "main": "bundles/chart.umd.js",
+  "module": "fesm5/chart.js",
+  "es2015": "fesm2015/chart.js",
+  "esm5": "esm5/chart.js",
+  "esm2015": "esm2015/chart.js",
+  "fesm5": "fesm5/chart.js",
+  "fesm2015": "fesm2015/chart.js",
+  "typings": "chart.d.ts",
+  "metadata": "chart.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}
