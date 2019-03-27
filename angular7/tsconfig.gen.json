@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "noEmitOnError": true,
+    "declaration": false,
+    "forceConsistentCasingInFileNames": true,
+    "rootDirs": ["src"],
+    "lib": ["esnext"],
+    "typeRoots": ["../node_modules/@types"],
+    "types": [
+      "node",
+      "jasmine",
+      "express"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "bin",
+    "lib",
+    "spec"
+  ],
+  "include": [
+    "generatorFix.ts"
+  ]
+}

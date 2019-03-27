@@ -1,148 +1,298 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "first-dashboard": {
-      "root": "first-dashboard",
-      "sourceRoot": "first-dashboard/src",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "first-dashboard/tsconfig.lib.json",
-            "project": "first-dashboard/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "first-dashboard/src/test.ts",
-            "tsConfig": "first-dashboard/tsconfig.spec.json",
-            "karmaConfig": "first-dashboard/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "first-dashboard/tsconfig.lib.json",
-              "first-dashboard/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "second-dashboard": {
-      "root": "second-dashboard",
-      "sourceRoot": "second-dashboard/src",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "second-dashboard/tsconfig.lib.json",
-            "project": "second-dashboard/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "second-dashboard/src/test.ts",
-            "tsConfig": "second-dashboard/tsconfig.spec.json",
-            "karmaConfig": "second-dashboard/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "second-dashboard/tsconfig.lib.json",
-              "second-dashboard/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "workbench": {
-      "root": "workbench",
-      "sourceRoot": "workbench/src",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "workbench/tsconfig.lib.json",
-            "project": "workbench/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "workbench/src/test.ts",
-            "tsConfig": "workbench/tsconfig.spec.json",
-            "karmaConfig": "workbench/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "workbench/tsconfig.lib.json",
-              "workbench/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "chart": {
-      "root": "chart",
-      "sourceRoot": "chart/src",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "chart/tsconfig.lib.json",
-            "project": "chart/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "chart/src/test.ts",
-            "tsConfig": "chart/tsconfig.spec.json",
-            "karmaConfig": "chart/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "chart/tsconfig.lib.json",
-              "chart/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    }
-  },
-  "defaultProject": "first-dashboard"
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"workbench": {
+			"root": "workbench/",
+			"sourceRoot": "workbench/src",
+			"projectType": "application",
+			"prefix": "app",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"tsConfig": "workbench/tsconfig.lib.json",
+						"project": "workbench/ng-package.json"
+					}
+				},
+				"build-self": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"polyfills": "workbench/src/polyfills.ts",
+						"outputPath": "dist/workbench",
+						"index": "workbench/src/index.html",
+						"main": "workbench/src/main.ts",
+						"tsConfig": "workbench/tsconfig.lib.json",
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "workbench:build-self"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "workbench:build-self:production"
+						}
+					}
+				}
+			}
+		},
+		"first-dashboard": {
+			"root": "first-dashboard/",
+			"sourceRoot": "first-dashboard/src",
+			"projectType": "application",
+			"prefix": "app",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"tsConfig": "first-dashboard/tsconfig.lib.json",
+						"project": "first-dashboard/ng-package.json"
+					}
+				},
+				"build-self": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"polyfills": "first-dashboard/src/polyfills.ts",
+						"outputPath": "dist/first-dashboard",
+						"index": "first-dashboard/src/index.html",
+						"main": "first-dashboard/src/main.ts",
+						"tsConfig": "first-dashboard/tsconfig.lib.json",
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "first-dashboard:build-self"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "first-dashboard:build-self:production"
+						}
+					}
+				}
+			}
+		},
+		"second-dashboard": {
+			"root": "second-dashboard/",
+			"sourceRoot": "second-dashboard/src",
+			"projectType": "application",
+			"prefix": "app",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"tsConfig": "second-dashboard/tsconfig.lib.json",
+						"project": "second-dashboard/ng-package.json"
+					}
+				},
+				"build-self": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"polyfills": "second-dashboard/src/polyfills.ts",
+						"outputPath": "dist/second-dashboard",
+						"index": "second-dashboard/src/index.html",
+						"main": "second-dashboard/src/main.ts",
+						"tsConfig": "second-dashboard/tsconfig.lib.json",
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "second-dashboard:build-self"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "second-dashboard:build-self:production"
+						}
+					}
+				}
+			}
+		},
+		"first-component": {
+			"root": "first-component/",
+			"sourceRoot": "first-component/src",
+			"projectType": "application",
+			"prefix": "app",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"tsConfig": "first-component/tsconfig.lib.json",
+						"project": "first-component/ng-package.json"
+					}
+				},
+				"build-self": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"polyfills": "first-component/src/polyfills.ts",
+						"outputPath": "dist/first-component",
+						"index": "first-component/src/index.html",
+						"main": "first-component/src/main.ts",
+						"tsConfig": "first-component/tsconfig.lib.json",
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "first-component:build-self"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "first-component:build-self:production"
+						}
+					}
+				}
+			}
+		},
+		"second-component": {
+			"root": "second-component/",
+			"sourceRoot": "second-component/src",
+			"projectType": "application",
+			"prefix": "app",
+			"schematics": {},
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"tsConfig": "second-component/tsconfig.lib.json",
+						"project": "second-component/ng-package.json"
+					}
+				},
+				"build-self": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"polyfills": "second-component/src/polyfills.ts",
+						"outputPath": "dist/second-component",
+						"index": "second-component/src/index.html",
+						"main": "second-component/src/main.ts",
+						"tsConfig": "second-component/tsconfig.lib.json",
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "second-component:build-self"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "second-component:build-self:production"
+						}
+					}
+				}
+			}
+		}
+	},
+	"defaultProject": "first-dashboard"
 }

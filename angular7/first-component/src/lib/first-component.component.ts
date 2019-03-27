@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-workbench',
+  selector: 'app-first-component',
   template: `
     <p>
-      workbench works!
+      first-component works!
     </p>
   `,
   styles: []
 })
-export class WorkbenchComponent implements OnInit {
+export class FirstComponentComponent implements OnInit {
 
   constructor() { }
 

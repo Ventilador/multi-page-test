@@ -1,6 +1,6 @@
 {
-  "$schema": "/../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "/../dist/second-dashboard",
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/second-dashboard",
   "lib": {
     "entryFile": "src/public_api.ts"
   }

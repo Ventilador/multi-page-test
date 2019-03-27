@@ -20,21 +20,41 @@
     ],
     "paths": {
       "first-dashboard": [
+        "dist/first-dashboard",
         "dist/first-dashboard"
       ],
       "first-dashboard/*": [
+        "dist/first-dashboard/*",
         "dist/first-dashboard/*"
       ],
       "second-dashboard": [
+        "dist/second-dashboard",
         "dist/second-dashboard"
       ],
       "second-dashboard/*": [
+        "dist/second-dashboard/*",
         "dist/second-dashboard/*"
       ],
       "workbench": [
+        "dist/workbench",
+        "dist/workbench",
+        "dist/workbench",
+        "dist/workbench",
+        "dist/workbench",
+        "dist/workbench",
+        "dist/workbench",
+        "dist/workbench",
         "dist/workbench"
       ],
       "workbench/*": [
+        "dist/workbench/*",
+        "dist/workbench/*",
+        "dist/workbench/*",
+        "dist/workbench/*",
+        "dist/workbench/*",
+        "dist/workbench/*",
+        "dist/workbench/*",
+        "dist/workbench/*",
         "dist/workbench/*"
       ],
       "chart": [
@@ -42,6 +62,60 @@
       ],
       "chart/*": [
         "dist/chart/*"
+      ],
+      "ble-bla": [
+        "dist/ble-bla",
+        "dist/ble-bla",
+        "dist/ble-bla",
+        "dist/ble-bla",
+        "dist/ble-bla"
+      ],
+      "ble-bla/*": [
+        "dist/ble-bla/*",
+        "dist/ble-bla/*",
+        "dist/ble-bla/*",
+        "dist/ble-bla/*",
+        "dist/ble-bla/*"
+      ],
+      "ble-ble": [
+        "dist/ble-ble",
+        "dist/ble-ble",
+        "dist/ble-ble",
+        "dist/ble-ble",
+        "dist/ble-ble",
+        "dist/ble-ble",
+        "dist/ble-ble",
+        "dist/ble-ble"
+      ],
+      "ble-ble/*": [
+        "dist/ble-ble/*",
+        "dist/ble-ble/*",
+        "dist/ble-ble/*",
+        "dist/ble-ble/*",
+        "dist/ble-ble/*",
+        "dist/ble-ble/*",
+        "dist/ble-ble/*",
+        "dist/ble-ble/*"
+      ],
+      "ble-bli": [
+        "dist/ble-bli",
+        "dist/ble-bli"
+      ],
+      "ble-bli/*": [
+        "dist/ble-bli/*",
+        "dist/ble-bli/*"
+      ],
+      "first-component": [
+        "dist/first-component"
+      ],
+      "first-component/*": [
+        "dist/first-component/*"
+      ],
+      "second-component": [
+        "dist/second-component"
+      ],
+      "second-component/*": [
+        "dist/second-component/*"
       ]
     }
   }
