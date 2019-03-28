@@ -1,5 +1,5 @@
 {
-  "name": "workbench",
+  "name": "header",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
@@ -11,5 +11,8 @@
   "esm5": "dist-lib/esm5/workbench.js",
   "esm2015": "dist-lib/esm2015/workbench.js",
   "fesm5": "dist-lib/fesm5/workbench.js",
-  "fesm2015": "dist-lib/fesm2015/workbench.js"
+  "fesm2015": "dist-lib/fesm2015/workbench.js",
+  "typings": "dist-lib/header.d.ts",
+  "metadata": "dist-lib/header.metadata.json",
+  "sideEffects": false
 }

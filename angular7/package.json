@@ -2,7 +2,7 @@
   "name": "angular7",
   "version": "0.0.0",
   "scripts": {
-    "postcreate": "ts-node --project tsconfig.gen.json --transpileOnly generatorFix && rimraf projects",
+    "postcreate": "ts-node --project tsconfig.gen.json --transpileOnly generatorFix && rimraf projects **/*.spec.ts && yarn",
     "create": "ng generate",
     "ng": "ng",
     "start": "ng serve",

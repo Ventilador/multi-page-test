@@ -1,7 +1,6 @@
 /// <reference path="node_modules/typescript/lib/lib.d.ts"/>
 /// <reference path="node_modules/typescript/lib/lib.dom.d.ts"/>
 /// <reference path="node_modules/typescript/lib/lib.es2016.full.d.ts"/>
-/// <reference path="node_modules/@types/node"/>
 // ts-lint:disable
 import * as _fs from 'fs';
 import { spawn } from 'child_process';
@@ -20,10 +19,30 @@ const args = (JSON.parse(process.env.npm_config_argv).original as string[])
 
 
 Promise.all([
-  fixFolder(args[0]).then(_ => createFiles(args[0])),
+  fixPackageJson(args[0]),
+  fixFolder(args[0]).then(_ => Promise.all([createFiles(args[0]), fixNGPackage(args[0]), fixProjPackage(args[0])])),
   fixAngularJson(args[0])
 ])
   .catch(console.error);
+
+function fixProjPackage(folderName: string) {
+  return fs.readFile(folderName + '/package.json', 'utf8')
+    .then(content => {
+      const json = JSON.parse(content);
+      Object.assign(json, {
+        main: 'dist-lib/bundles/workbench.umd.js',
+        module: 'dist-lib/fesm5/workbench.js',
+        es2015: 'dist-lib/fesm2015/workbench.js',
+        esm5: 'dist-lib/esm5/workbench.js',
+        esm2015: 'dist-lib/esm2015/workbench.js',
+        fesm5: 'dist-lib/fesm5/workbench.js',
+        fesm2015: 'dist-lib/fesm2015/workbench.js',
+        typings: 'dist-lib/header.d.ts',
+        metadata: 'dist-lib/header.metadata.json'
+      });
+      return fs.writeFile(folderName + '/package.json', JSON.stringify(json, null, '  '));
+    });
+}
 
 function fixFolder(folderName: string) {
   return new Promise((res) => {
@@ -33,6 +52,18 @@ function fixFolder(folderName: string) {
       stdio: 'inherit'
     }).on('exit', res);
   });
+}
+
+function fixPackageJson(folderName: string) {
+  return fs.readFile('package.json', 'utf8')
+    .then(content => {
+      const json = JSON.parse(content);
+      const index = json.workspaces.indexOf(folderName);
+      if (index === -1) {
+        json.workspaces.push(folderName);
+      }
+      return fs.writeFile('package.json', JSON.stringify(json, null, '  '));
+    });
 }
 
 function createFiles(folderName: string) {
@@ -127,65 +158,76 @@ function camelCase(name: string) {
   return slit.map(i => i[0].toUpperCase() + i.slice(1)).join('');
 }
 
+function fixNGPackage(folderName) {
+  return fs.writeFile(folderName + '/ng-package.json', `{
+  "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "dist-lib",
+  "lib": {
+    "entryFile": "src/public_api.ts"
+  }
+}`);
+}
+
 function fixAngularJson(folderName: string) {
   const content = JSON.parse(`{
-    "root": "${folderName}/",
-    "sourceRoot": "${folderName}/src",
-    "projectType": "application",
-    "prefix": "app",
-    "schematics": {},
-    "architect": {
-      "build": {
-        "builder": "@angular-devkit/build-ng-packagr:build",
-        "options": {
-          "tsConfig": "${folderName}/tsconfig.lib.json",
-          "project": "${folderName}/ng-package.json"
-        }
+  "root": "${folderName}/",
+  "sourceRoot": "${folderName}/src",
+  "projectType": "application",
+  "prefix": "app",
+  "schematics": {},
+  "architect": {
+    "build": {
+      "builder": "@angular-devkit/build-ng-packagr:build",
+      "options": {
+        "tsConfig": "${folderName}/tsconfig.lib.json",
+        "project": "${folderName}/ng-package.json"
+      }
+    },
+    "build-self": {
+      "builder": "@angular-devkit/build-angular:browser",
+      "options": {
+        "polyfills": "${folderName}/src/polyfills.ts",
+        "outputPath": "${folderName}/dist",
+        "index": "${folderName}/src/index.html",
+        "preserveSymlinks": true,
+        "main": "${folderName}/src/main.ts",
+        "tsConfig": "${folderName}/tsconfig.lib.json",
+        "scripts": []
       },
-      "build-self": {
-        "builder": "@angular-devkit/build-angular:browser",
-        "options": {
-          "polyfills": "${folderName}/src/polyfills.ts",
-          "outputPath": "dist/${folderName}",
-          "index": "${folderName}/src/index.html",
-          "main": "${folderName}/src/main.ts",
-          "tsConfig": "${folderName}/tsconfig.lib.json",
-          "scripts": []
-        },
-        "configurations": {
-          "production": {
-            "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "aot": true,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true,
-            "budgets": [
-              {
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }
-            ]
-          }
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "aot": true,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            }
+          ]
         }
+      }
+    },
+    "serve": {
+      "builder": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "${folderName}:build-self"
       },
-      "serve": {
-        "builder": "@angular-devkit/build-angular:dev-server",
-        "options": {
-          "browserTarget": "${folderName}:build-self"
-        },
-        "configurations": {
-          "production": {
-            "browserTarget": "${folderName}:build-self:production"
-          }
+      "configurations": {
+        "production": {
+          "browserTarget": "${folderName}:build-self:production"
         }
       }
     }
-  }`);
+  }
+}`);
   return fs.readFile('angular.json', 'utf8')
     .then(text => {
       const json = JSON.parse(text);
