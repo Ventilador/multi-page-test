@@ -14,5 +14,8 @@
   "fesm2015": "dist-lib/fesm2015/workbench.js",
   "typings": "dist-lib/header.d.ts",
   "metadata": "dist-lib/header.metadata.json",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
 }

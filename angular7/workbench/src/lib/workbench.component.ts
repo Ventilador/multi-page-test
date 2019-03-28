@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-workbench',
   template: `
     <p>
+    <button mat-button></button>
       workbench works!
     </p>
   `,

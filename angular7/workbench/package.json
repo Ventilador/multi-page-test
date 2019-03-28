@@ -11,5 +11,9 @@
   "esm5": "dist-lib/esm5/workbench.js",
   "esm2015": "dist-lib/esm2015/workbench.js",
   "fesm5": "dist-lib/fesm5/workbench.js",
-  "fesm2015": "dist-lib/fesm2015/workbench.js"
+  "fesm2015": "dist-lib/fesm2015/workbench.js",
+  "dependencies": {
+    "@angular/header": "0.0.1",
+    "tslib": "^1.9.0"
+  }
 }

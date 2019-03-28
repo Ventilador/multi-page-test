@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { WorkbenchComponent } from './workbench.component';
-import { HeaderModule } from 'header';
+import { MatButtonModule } from '@angular/material';
+import { HeaderModule } from '@angular/header';
+
 @NgModule({
   declarations: [WorkbenchComponent],
   imports: [
+    MatButtonModule,
     HeaderModule
   ],
   exports: [WorkbenchComponent]

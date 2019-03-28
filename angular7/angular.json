@@ -1,126 +1,122 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-	"version": 1,
-	"newProjectRoot": "projects",
-	"projects": {
-		"workbench": {
-			"root": "workbench/",
-			"sourceRoot": "workbench/src",
-			"projectType": "application",
-			"prefix": "app",
-			"schematics": {},
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-ng-packagr:build",
-					"options": {
-						"tsConfig": "workbench/tsconfig.lib.json",
-						"project": "workbench/ng-package.json"
-					}
-				},
-				"build-self": {
-					"builder": "@angular-devkit/build-angular:browser",
-					"options": {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "workbench": {
+      "root": "workbench/",
+      "sourceRoot": "workbench/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "workbench/tsconfig.lib.json",
+            "project": "workbench/ng-package.json"
+          }
+        },
+        "build-self": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
             "preserveSymlinks": true,
-						"polyfills": "workbench/src/polyfills.ts",
-						"outputPath": "workbench/dist",
-						"index": "workbench/src/index.html",
-						"main": "workbench/src/main.ts",
-						"tsConfig": "workbench/tsconfig.lib.json",
-						"scripts": []
-					},
-					"configurations": {
-						"production": {
-							"optimization": true,
-							"outputHashing": "all",
-							"sourceMap": false,
-							"extractCss": true,
-							"namedChunks": false,
-							"aot": true,
-							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true,
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "2mb",
-									"maximumError": "5mb"
-								}
-							]
-						}
-					}
-				},
-				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"options": {
-						"browserTarget": "workbench:build-self"
-					},
-					"configurations": {
-						"production": {
-							"browserTarget": "workbench:build-self:production"
-						}
-					}
-				}
-			}
-		},
-		"header": {
-			"root": "header/",
-			"sourceRoot": "header/src",
-			"projectType": "application",
-			"prefix": "app",
-			"schematics": {},
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-ng-packagr:build",
-					"options": {
-						"tsConfig": "header/tsconfig.lib.json",
-						"project": "header/ng-package.json"
-					}
-				},
-				"build-self": {
-					"builder": "@angular-devkit/build-angular:browser",
-					"options": {
-						"polyfills": "header/src/polyfills.ts",
+            "polyfills": "workbench/src/polyfills.ts",
+            "outputPath": "workbench/dist",
+            "index": "workbench/src/index.html",
+            "main": "workbench/src/main.ts",
+            "tsConfig": "workbench/tsconfig.lib.json",
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "workbench:build-self"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "workbench:build-self:production"
+            }
+          }
+        }
+      }
+    },
+    "header": {
+      "root": "header/",
+      "sourceRoot": "header/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "header/tsconfig.lib.json",
+            "project": "header/ng-package.json"
+          }
+        },
+        "build-self": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "polyfills": "header/src/polyfills.ts",
             "outputPath": "header/dist",
             "preserveSymlinks": true,
-						"index": "header/src/index.html",
-						"main": "header/src/main.ts",
-						"tsConfig": "header/tsconfig.lib.json",
-						"scripts": []
-					},
-					"configurations": {
-						"production": {
-							"optimization": true,
-							"outputHashing": "all",
-							"sourceMap": false,
-							"extractCss": true,
-							"namedChunks": false,
-							"aot": true,
-							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true,
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "2mb",
-									"maximumError": "5mb"
-								}
-							]
-						}
-					}
-				},
-				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"options": {
-						"browserTarget": "header:build-self"
-					},
-					"configurations": {
-						"production": {
-							"browserTarget": "header:build-self:production"
-						}
-					}
-				}
-			}
-		}
-	},
-	"defaultProject": "first-dashboard"
+            "index": "header/src/index.html",
+            "main": "header/src/main.ts",
+            "tsConfig": "header/tsconfig.lib.json",
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "header:build-self"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "header:build-self:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "first-dashboard"
 }
